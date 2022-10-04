@@ -62,7 +62,7 @@ export const MainScreen = () => {
       </CText>
       <ScrollView style={{ flex: 1 }}>
         {favoritesMovie.map((movie) => (
-          <MovieCard movie={movie} />
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </ScrollView>
     </SafeAreaView>
