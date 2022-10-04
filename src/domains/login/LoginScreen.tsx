@@ -49,7 +49,7 @@ export const LoginScreen = () => {
           Login
         </CText>
         <CText variant="subtitle" style={{ marginBottom: spacing[12] }}>
-          Please request permission fist before log in
+          Please request permission first before log in
         </CText>
         <Button
           style={{ marginBottom: spacing[56] }}
