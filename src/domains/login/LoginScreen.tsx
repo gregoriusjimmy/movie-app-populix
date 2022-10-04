@@ -19,7 +19,7 @@ export const LoginScreen = () => {
 
   const handleRequestAccess = async () => {
     try {
-      const res = await postCreateRequestToken({ redirect_to: 'movie-app-populix://' });
+      const res = await postCreateRequestToken({ redirect_to: null });
       if (!res.success) throw Error();
       Linking.openURL(`https://www.themoviedb.org/auth/access?request_token=${res.request_token}`);
       setRequestToken(res.request_token);

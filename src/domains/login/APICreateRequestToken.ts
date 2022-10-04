@@ -8,7 +8,7 @@ export type TCreateRequestTokenRes = {
 };
 
 export type TCreateRequestTokenSpec = {
-  redirect_to: string;
+  redirect_to: string | null;
 };
 
 export const usePostCreateRequestToken = usePost<TCreateRequestTokenRes, TCreateRequestTokenSpec>(
