@@ -9,8 +9,6 @@ import { useDispatch } from 'react-redux';
 
 import { usePostCreateAccessToken } from './APICreateAccessToken';
 import { usePostCreateRequestToken } from './APICreateRequestToken';
-const READ_ACCESS_TOKEN =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NjkwMzMyYTIzZDI0ODRlNjAzNzdhODA3ODIyYWNhMCIsInN1YiI6IjYzM2MwNmNiMzg0NjlhMDA3YWM1YzBiYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xYmHkHFPVdS1437cJMWIt8huXH-RveQQXImvtvlZiz8';
 
 export const LoginScreen = () => {
   const postCreateRequestToken = usePostCreateRequestToken();
@@ -21,10 +19,7 @@ export const LoginScreen = () => {
 
   const handleRequestAccess = async () => {
     try {
-      const res = await postCreateRequestToken(
-        { redirect_to: 'movie-app-populix://' },
-        { headers: { Authorization: `Bearer ${READ_ACCESS_TOKEN}` } }
-      );
+      const res = await postCreateRequestToken({ redirect_to: 'movie-app-populix://' });
       if (!res.success) throw Error();
       Linking.openURL(`https://www.themoviedb.org/auth/access?request_token=${res.request_token}`);
       setRequestToken(res.request_token);
@@ -35,12 +30,10 @@ export const LoginScreen = () => {
 
   const Login = async () => {
     try {
-      const res = await postCreateAccessToken(
-        {
-          request_token: requestToken,
-        },
-        { headers: { Authorization: `Bearer ${READ_ACCESS_TOKEN}` } }
-      );
+      if (!requestToken) return;
+      const res = await postCreateAccessToken({
+        request_token: requestToken,
+      });
       if (res.success) {
         dispatch(setAuth({ accessToken: res.access_token, accountId: res.account_id }));
       }
